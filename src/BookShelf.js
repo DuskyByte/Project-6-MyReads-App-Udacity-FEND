@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 class BookShelf extends Component {
   render() {
-    const { books } = this.props
+    const { books, onShelfChange } = this.props
 
     return (
       <div className="list-books">
@@ -16,15 +16,15 @@ class BookShelf extends Component {
               <h2 className="bookshelf-title">Currently Reading</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                {books.map((book) => (
+                {books.filter(book => (book.shelf === 'currentlyReading')).map((book) => (
                   <li key={book.id}>
                     <div className="book">
                       <div className="book-top">
                       <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + book.imageLinks.thumbnail + ')' }}></div>
                         <div className="book-shelf-changer">
-                          <select>
+                          <select defaultValue={book.shelf} onChange={(event) => onShelfChange(book, event.target.value)}>
                             <option value="move" disabled>Move to...</option>
-                            <option value="currentlyReading" defaultValue>✔Currently Reading</option>
+                            <option value="currentlyReading">✔Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
                             <option value="read">Read</option>
                             <option value="none">None</option>
@@ -43,16 +43,16 @@ class BookShelf extends Component {
             <h2 className="bookshelf-title">Want to Read</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                {books.map((book) => (
+                {books.filter(book => (book.shelf === 'wantToRead')).map((book) => (
                   <li key={book.id}>
                     <div className="book">
                       <div className="book-top">
                       <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + book.imageLinks.thumbnail + ')' }}></div>
                         <div className="book-shelf-changer">
-                          <select>
+                          <select defaultValue={book.shelf} onChange={(event) => onShelfChange(book, event.target.value)}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
-                            <option value="wantToRead" defaultValue>✔Want to Read</option>
+                            <option value="wantToRead">✔Want to Read</option>
                             <option value="read">Read</option>
                             <option value="none">None</option>
                           </select>
@@ -70,17 +70,17 @@ class BookShelf extends Component {
             <h2 className="bookshelf-title">Read</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                {books.map((book) => (
+                {books.filter(book => (book.shelf === 'read')).map((book) => (
                   <li key={book.id}>
                     <div className="book">
                       <div className="book-top">
                       <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + book.imageLinks.thumbnail + ')' }}></div>
                         <div className="book-shelf-changer">
-                          <select>
+                          <select defaultValue={book.shelf} onChange={(event) => onShelfChange(book, event.target.value)}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
-                            <option value="read" defaultValue>✔Read</option>
+                            <option value="read">✔Read</option>
                             <option value="none">None</option>
                           </select>
                         </div>
