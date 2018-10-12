@@ -17,11 +17,15 @@ class BooksApp extends Component {
   }
 
   shelfChange(book, shelf) {
-    update(book, shelf)
-    getAll().then((books) => {
-      console.log(book.title + ' changed shelves.')
-      this.setState({ books })
-    })
+    update(book, shelf) //Updates book in BooksAPI
+
+    //Updates APP's local state
+    console.log(book)
+    const index = this.state.books.findIndex(index => index === book)
+    book.shelf = shelf
+    const updatedBooks = [...this.state.books]
+    updatedBooks[index] = book
+    this.setState({ updatedBooks })
   }
 
   render() {
@@ -35,8 +39,13 @@ class BooksApp extends Component {
             }}
           />
         )}/>
-        <Route exact path="/search" render={() => (
-          <BookSearch />
+        <Route path="/search" render={() => (
+          <BookSearch
+            books={this.state.books}
+            onShelfChange={(book, shelf) => {
+              this.shelfChange(book, shelf)
+            }}
+          />
         )}/>
       </div>
     )
