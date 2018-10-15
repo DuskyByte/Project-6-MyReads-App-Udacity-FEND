@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import BooksApp from './App'
 import './index.css'
 
+//Should be self-explanatory
+
 ReactDOM.render(
 	<BrowserRouter>
 		<BooksApp />

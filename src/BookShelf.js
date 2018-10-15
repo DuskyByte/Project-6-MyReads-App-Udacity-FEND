@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import BookList from './BookList'
 import './App.css'
 
+//Should be self-explanatory
+
 class BookShelf extends Component {
   static propTypes = {
     currentlyReading: PropTypes.array.isRequired,

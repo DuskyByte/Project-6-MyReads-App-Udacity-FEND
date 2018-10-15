@@ -24,6 +24,7 @@ class BookSearch extends Component {
           this.setState(state => ({ searchResults: [] }))
         ) : (
           results.sort(sortBy('title')),
+          //Maps over the results Array and returns the most current copy of a book if it is in the onShelf Array otherwise returns it's own book
           this.setState(state => ({ searchResults: results.map(book => this.props.onShelf.find(testBook => testBook.id === book.id) || book) }))
         )
       )

@@ -21,14 +21,14 @@ class BookList extends Component {
                 />
                 <div className="book-shelf-changer">
                   <select
-                    defaultValue={book.shelf || 'none'}
+                    defaultValue={book.shelf || 'none'} {/* Ensures books that don't have a shelf are on the none shelf and all others are defaulted correctly */}
                     onChange={(event) => this.props.changeShelf(book, event.target.value)}
                   >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">{book.shelf === 'currentlyReading' && '✔ '}Currently Reading</option>
                     <option value="wantToRead">{book.shelf === 'wantToRead' && '✔ '}Want to Read</option>
                     <option value="read">{book.shelf === 'read' && '✔ '}Read</option>
-                    <option value="none">{(book.shelf === undefined || book.shelf === 'none') && '✔ '}None</option>
+                    <option value="none">{(book.shelf === undefined || book.shelf === 'none') && '✔ '}None</option> {/* Ensures books that don't have a shelf or are on the none shelf are listed correctly */}
                   </select>
                 </div>
               </div>
