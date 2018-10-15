@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-// import * as BooksAPI from './BooksAPI'
 import BookList from './BookList'
 import './App.css'
 
@@ -25,6 +24,9 @@ class BookShelf extends Component {
               <div className="bookshelf-books">
                 <BookList
                   books={this.props.currentlyReading}
+                  changeShelf={(book, shelf) => {
+                    this.props.changeShelf(book, shelf)
+                  }}
                 />
               </div>
             </div>
@@ -33,6 +35,9 @@ class BookShelf extends Component {
               <div className="bookshelf-books">
                 <BookList
                   books={this.props.wantToRead}
+                  changeShelf={(book, shelf) => {
+                    this.props.changeShelf(book, shelf)
+                  }}
                 />
               </div>
             </div>
@@ -41,6 +46,9 @@ class BookShelf extends Component {
               <div className="bookshelf-books">
                 <BookList
                   books={this.props.read}
+                  changeShelf={(book, shelf) => {
+                    this.props.changeShelf(book, shelf)
+                  }}
                 />
               </div>
             </div>

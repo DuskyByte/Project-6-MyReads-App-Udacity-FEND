@@ -8,9 +8,7 @@ import './App.css'
 
 class BookSearch extends Component {
   static propTypes = {
-    currentlyReading: PropTypes.array.isRequired,
-    wantToRead: PropTypes.array.isRequired,
-    read: PropTypes.array.isRequired
+    onShelf: PropTypes.array.isRequired
   }
 
   state = {
@@ -22,10 +20,11 @@ class BookSearch extends Component {
     this.setState({ query: query })
     if (query) {
       BooksAPI.search(query).then(
-        result => (result) ? (
-          this.setState(state => ({ searchResults: result }))
-        ) : (
+        results => (results.error) ? (
           this.setState(state => ({ searchResults: [] }))
+        ) : (
+          results.sort(sortBy('title')),
+          this.setState(state => ({ searchResults: results.map(book => this.props.onShelf.find(testBook => testBook.id === book.id) || book) }))
         )
       )
     } else {
@@ -53,6 +52,9 @@ class BookSearch extends Component {
         <div className="search-books-results">
         <BookList
           books={this.state.searchResults}
+          changeShelf={(book, shelf) => {
+            this.props.changeShelf(book, shelf)
+          }}
         />
         </div>
       </div>
