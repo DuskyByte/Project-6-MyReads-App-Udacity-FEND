@@ -20,8 +20,9 @@ class BookList extends Component {
                   coverLinks={book.imageLinks}
                 />
                 <div className="book-shelf-changer">
+                  {/* defaultValue - Ensures books that don't have a shelf are on the none shelf and all others are defaulted correctly */}
                   <select
-                    defaultValue={book.shelf || 'none'} {/* Ensures books that don't have a shelf are on the none shelf and all others are defaulted correctly */}
+                    defaultValue={book.shelf || 'none'}
                     onChange={(event) => this.props.changeShelf(book, event.target.value)}
                   >
                     <option value="move" disabled>Move to...</option>

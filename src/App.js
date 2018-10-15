@@ -82,9 +82,10 @@ class BooksApp extends Component {
             }}
           />
         )}/>
+        {/* pushes all of the state Arrays into one for testing in the BookSearch component */}
         <Route path="/search" render={() => (
           <BookSearch 
-            onShelf={[].concat(this.state.currentlyReading, this.state.wantToRead, this.state.read)} {/* pushes all of the state Arrays into one for testing in the BookSearch component */}
+            onShelf={[].concat(this.state.currentlyReading, this.state.wantToRead, this.state.read)}
             changeShelf={(book, shelf) => {
               this.updateShelf(book, shelf)
             }}
